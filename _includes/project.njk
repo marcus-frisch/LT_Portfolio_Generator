@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ title }}</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .gallery img {
+      width: 100%;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      display: block;
+    }
+
+    .gallery a:hover img {
+      transform: scale(1.02);
+      transition: transform 0.2s ease;
+    }
+
+      .updated {
+    font-size: 0.9rem;
+    color: #888;
+    margin-top: -0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+      .completed {
+    font-size: 0.9rem;
+    color: #888;
+    margin-top: -0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  iframe {
+  border-radius: 8px;
+  margin-top: 1.5rem;
+}
+  </style>
+</head>
+<body>
+  <a href="{{ linktree }}">← Back to projects</a>
+
+  <h1>{{ title }}</h1>
+  {% if updated %}
+  <p class="updated">Last updated: {{ updated }}</p>
+{% endif %}
+
+  {% if completed %}
+  <p class="completed">Completed: {{ completed }}</p>
+{% endif %}
+
+  <div>{{ content | safe }}</div>
+
+  {% if images %}
+    <div class="gallery">
+      {% for image in images %}
+        <a href="{{ image }}" target="_blank" rel="noopener">
+          <img src="{{ image }}" alt="">
+        </a>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p><em>No images found for this project.</em></p>
+  {% endif %}
+
+  {% if youtube %}
+  <div style="margin-top: 2rem;">
+    <iframe
+      width="100%"
+      height="315"
+      src="{{ youtube | replace('watch?v=', 'embed/') }}"
+      title="YouTube video"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+    </iframe>
+  </div>
+{% endif %}
+</body>
+</html>

@@ -1,0 +1,20 @@
+---
+title: "Your Project Title Here"
+layout: "project.njk"
+updated: "10 April 2025"
+youtube: "https://www.youtube.com/watch?v=Faow3SKIzq0"
+---
+
+This text is a placeholder description for your project.
+The above tags such as 'updated', 'completed' and 'youtube' can be removed.
+You can write a short introduction here explaining what your project is about and what its goals are.
+
+You might also want to mention what inspired the project or what problem it’s trying to solve.
+
+## Interesting information:
+- Mention any tools, languages, or materials used  
+- Add fun facts or challenges you faced  
+- You can include anything relevant to the project  
+- This section is totally optional
+
+For this example project, below the images should render along with a youtube video.
