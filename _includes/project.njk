@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ title }}</title>
   <style>
     body {
@@ -18,9 +19,15 @@
 
     .gallery {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      grid-template-columns: repeat(2, 1fr); /* default: 2 columns (mobile) */
       gap: 1rem;
       margin-top: 2rem;
+    }
+
+    @media (min-width: 768px) {
+      .gallery {
+        grid-template-columns: repeat(3, 1fr); /* 3 columns on desktop */
+      }
     }
 
     .gallery img {
@@ -71,14 +78,14 @@
   <div>{{ content | safe }}</div>
 
   {% if images %}
-  <div style="max-width: 900px; margin: auto;">
+
     <div class="gallery">
       {% for image in images %}
         <a href="{{ image }}" target="_blank" rel="noopener">
           <img src="{{ image }}" alt="">
         </a>
       {% endfor %}
-    </div>
+  
     </div>
   {% else %}
     <p><em>No images found for this project.</em></p>
