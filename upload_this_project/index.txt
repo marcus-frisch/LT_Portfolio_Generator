@@ -3,6 +3,7 @@ title: "Your Project Title Here"
 layout: "project.njk"
 updated: "10 April 2025"
 youtube: "https://www.youtube.com/watch?v=Faow3SKIzq0"
+repo: "https://github.com/marcus-frisch/LT_Portfolio_Generator"
 ---
 
 This text is a placeholder description for your project.

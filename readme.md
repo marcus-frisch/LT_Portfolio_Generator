@@ -6,9 +6,10 @@ Initially, I used Linktree to host links to dedicated Google Photos albums for e
 
 Despite its shortcomings, I appreciated a few things about that system:
 
-Linktree’s simple interface and reliable analytics
-The recognizability of the Linktree domain, which likely gave visitors confidence to click through
-The ease of creating and sharing photo albums
+- Linktree’s simple interface
+- The recognizability of the Linktree domain, which likely gave visitors confidence to click through.
+- The ease of creating and sharing photo albums.
+
 In searching for an upgrade, I wanted a more robust yet low-maintenance solution. Ideally, each project would have its own web page with a description, image gallery, optional embedded video, and links back to other projects. I still wanted analytics, and I wanted to avoid the overhead of managing a backend or writing boilerplate code each time I added a new project.
 
 Although I considered options like Notion and free website builders, they often came with limitations: paywalls, forced branding, or reduced control over layout and features. While I’m not experienced in web development, I found the idea of building a system I could control — and potentially extend in the future — appealing.
@@ -40,12 +41,14 @@ A fully static portfolio website built with [Eleventy](https://www.11ty.dev/), d
 ---
 
 ## 🔧 Setup
+The following guide will show you how to clone the repo onto your machine and build it and preview it locally. This will help familiarise you with the project and how it works. The latter half shares some important notes about using a third party to host your website.
+I use Netlify as I can simply connect it to my GitHub account and have it auto build from the repo.
 
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/marcus-frisch/lt_portfolio_generator.git
-cd lt_portfolio_generator
+git clone https://github.com/marcus-frisch/LT_Portfolio_Generator.git
+cd LT_Portfolio_Generator
 ```
 
 ### 2. Install Dependencies
@@ -154,13 +157,14 @@ npx @11ty/eleventy --serve
 Visit: [http://localhost:8080/projects/example_project/](http://localhost:8080/projects/example_project/)
 
 You should now see the example project visible:
+
 ![Example project webpage](https://res.cloudinary.com/mportfoliocloud/image/upload/v1744289208/other/example_project.png "Example project webpage")
 
 And any attempt to visit a link that is not an existing project or webpage should redirect you to your linktree.
 
 Congratulations, you're almost done.
 - To make this website pubically accessible, you'll need to upload it to a static host. You can use a git repository to upload to a host (which makes it quite convinent when you need to make changes such as uploading a new project).
-- I prefer to use Netlify because it will automatically rebuild the website when I commit.
+- I prefer to use [Netlify](https://www.netlify.com/) because it can be configured to automatically rebuild the website when new content is uploaded to Cloudinary (using webhooks) or you push a change to your repository
 - If you prefer to use another host such as 'GitHub pages' you (may) need to remove `_site` from `.gitignore` and figure out any additional setup required such as GitHub Actions.
 
 - ⚠️ **Attention!** Whenever you upload a new project to your cloudinary account you'll need to:
@@ -169,9 +173,8 @@ Congratulations, you're almost done.
 - - commit the new changes to your static host
 - - remember to add the new project webpage link to your linktree.
 
-### ✅ You're Done Congratulations!
-
----
+### ✅ Basic site setup is done Congratulations!
+Keep reading below though...
 
 ## 🌐 Deployment
 
@@ -183,11 +186,43 @@ You can deploy this site as a static project to:
 
 The `404.html` page gracefully redirects unknown URLs to your Linktree profile.
 
+### ⚠️ Remember
+When you use a third party to host your website, you'll need to define the 'environment variables' or remove the `.env` from the `.gitignore` file. (I highly do not recommend you do this.) Instead, look up how to configure environment variables on your host. This can be done easily within Netlify's control panel. Without updating the variables, the website will be completely useless and not able to build.
+
+Screenshot of configuring environment variables in Netlify control panel:
+![Build command in Netlify](https://res.cloudinary.com/mportfoliocloud/image/upload/v1753776674/other/net_env.png)
+
+---
+
+### 🤖 Automated building
+
+🏆 Personally, I use [Netlify](https://www.netlify.com/) because I can set up the project to be __completely automated for free__. This means, whenever I upload new content to Cloudinary (such as a new project or new photos to exising projects) the website will automatically re-build itself within a couple of minutes and I do not need to do anything.
+For now, I won't include a detailed step-by-step but rather the 'things you need to look into' to set this up yourself. It is not complicated and googling will find the resources and how to guides you need.
+If you're interested in doing this you'll need to look into:
+
+- Set a build command (Netlify: Project configuration -> Build settings -> Build command). This will be the build script we used earlier to build/preview the website on your machine. This allows Netlify to actually build your website.
+- Create a build hook (Netlify: Project configuration -> Build settings -> Build hook). This is a HTTP link that when visited will trigger Netlify to run your build script. This is what we call a 'webhook', and we can configure Cloudinary to call this webhook whenever you make changes to your assets on your account. (This is called a 'callback')
+- Implementing the webhook as a 'callback' on Cloudinary.
+
+Below I have some pictures simply showing you what this looks like implemented in the Admin dashboard panels of Netlify and Cloudinary as I write this.
+
+Configuring the build command in Netlify:
+![Build command in Netlify](https://res.cloudinary.com/mportfoliocloud/image/upload/v1753775611/other/net_build_sett.png)
+
+Configuring the webhook in Netlify:
+![Webhook in Netlify](https://res.cloudinary.com/mportfoliocloud/image/upload/v1753775623/other/net_webhook.png)
+
+Configuring the webhook in Cloudinary. Take note: I configured it to call the webhook whenever an asset (file/image) is uploaded, deleted or renamed.
+![Webhook in Cloudinary](https://res.cloudinary.com/mportfoliocloud/image/upload/v1753775637/other/cloud_webhook.png)
+
 ---
 
 ## 🧠 Notes
 
-- You can add new projects simply by uploading a `index.txt` description and images to a new folder in Cloudinary.
+- You can add new projects simply by uploading a new folder containing a `index.txt` description and images to a new folder in Cloudinary. No need to write code.
 - All styling is embedded for simplicity — no external CSS framework used.
+- If you want to make changes to the template, the `.njk` files are the template files to edit. (Contains the HTML and CSS)
+
+
 
 

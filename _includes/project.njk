@@ -74,6 +74,11 @@
   {% if completed %}
   <p class="completed">Completed: {{ completed }}</p>
 {% endif %}
+{% if repo %}
+  <p style="margin-top: -0.5rem; margin-bottom: 1.5rem; font-size: 0.95rem;">
+    Project repo: <a href="{{ repo }}" target="_blank" rel="noopener">{{ repo }}</a>
+  </p>
+{% endif %}
 
   <div>{{ content | safe }}</div>
 
