@@ -94,7 +94,7 @@ It's likely Cloudinary could change their settings dashboard in the future, so I
 
 The screenshot below shows how to access the settings and what the values should be.
 In the event the screenshot does not load, Here is the description.
-- We need to edit the default upload preset. Bottom right there is a settings cog icon, click it. In the side tab that opens up, click `Upload` (underneath Product environment settings).
+- We need to edit the default upload preset. Bottom left there is a settings cog icon, click it. In the side tab that opens up, click `Upload` (underneath Product environment settings).
 - Within the `Upload Presets` tab at the top of the screen, you should see one preset. Mine is called `ml_default`. Click the three dots on the far right, and click `edit`.
 - Ensure
 - - `Overwrite assets with the same public ID` is **ON**
@@ -154,7 +154,7 @@ Your project will be auto-generated inside the `projects/` folder with a gallery
 npx @11ty/eleventy --serve
 ```
 
-Visit: [http://localhost:8080/projects/example_project/](http://localhost:8080/projects/example_project/)
+Visit: [http://localhost:8080/projects/upload_this_project/](http://localhost:8080/projects/upload_this_project/)
 
 You should now see the example project visible:
 
